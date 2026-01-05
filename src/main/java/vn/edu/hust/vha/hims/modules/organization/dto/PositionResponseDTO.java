@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import vn.edu.hust.vha.hims.common.enumeration.PositionLevel;
 
 @Data
 @Builder

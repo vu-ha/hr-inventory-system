@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -25,7 +27,7 @@ import vn.edu.hust.vha.hims.common.enumeration.AppointmentStatus;
 @AllArgsConstructor
 @Builder
 public class Appointment extends BaseEntity{
-	
+	@Enumerated(EnumType.STRING)
 	@Column(name = "status", nullable = false)
 	private AppointmentStatus status;
 
