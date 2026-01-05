@@ -9,12 +9,11 @@ import lombok.NoArgsConstructor;
 import vn.edu.hust.vha.hims.common.enumeration.NotificationPriority;
 import vn.edu.hust.vha.hims.common.enumeration.NotificationType;
 
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
-
 public class EmployeeNotificationResponseDTO {
 	private UUID employeeId;
     private Boolean isRead;
