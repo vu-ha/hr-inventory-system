@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import vn.edu.hust.vha.hims.common.enumeration.Gender;
 import vn.edu.hust.vha.hims.common.enumeration.MaritalStatus;
+import vn.edu.hust.vha.hims.modules.contract.entity.Contract;
 import vn.edu.hust.vha.hims.modules.notification.entity.NotificationRecipient;
 import vn.edu.hust.vha.hims.modules.organization.entity.Appointment;
 import vn.edu.hust.vha.hims.modules.organization.entity.Decision;
@@ -111,6 +112,12 @@ public class Employee {
             fetch = FetchType.LAZY
     )
     private List<Decision> signedDecisions;
+    
+    @OneToMany(
+    	    mappedBy = "employee",
+    	    fetch = FetchType.LAZY
+    	)
+    private List<Contract> contracts;
     
     @OneToMany(mappedBy = "manager")
     private List<Department> managedDepartments;
