@@ -12,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,14 +47,8 @@ public class Department {
     @Column(name = "description", nullable = false)
     private String description;
     
-    @OneToMany(
-    		mappedBy = "department",
-            fetch = FetchType.LAZY
-    )
-    List<Employee> employee;
-    
-    @OneToOne
-    @JoinColumn(name = "manager_id", unique = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id") 
     private Employee manager;
     
     @ManyToOne
@@ -67,4 +60,11 @@ public class Department {
             fetch = FetchType.LAZY
     ) 
     private List<Department> children;
+    
+    @OneToMany(
+    		mappedBy = "department",
+    		//cascade = CascadeType.ALL, 
+            fetch = FetchType.LAZY
+    )
+    private List<Appointment> appointments; 
 }

@@ -12,10 +12,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,8 +22,9 @@ import lombok.Setter;
 import vn.edu.hust.vha.hims.common.enumeration.Gender;
 import vn.edu.hust.vha.hims.common.enumeration.MaritalStatus;
 import vn.edu.hust.vha.hims.modules.notification.entity.NotificationRecipient;
+import vn.edu.hust.vha.hims.modules.organization.entity.Appointment;
+import vn.edu.hust.vha.hims.modules.organization.entity.Decision;
 import vn.edu.hust.vha.hims.modules.organization.entity.Department;
-import vn.edu.hust.vha.hims.modules.organization.entity.PositionHistory;
 
 @Entity
 @Table(name = "employee", schema = "hrm") 
@@ -99,12 +97,21 @@ public class Employee {
     		cascade = CascadeType.ALL, 
             fetch = FetchType.LAZY
     )
-    private List<PositionHistory> positionHistory; 
+    private List<Decision> decisions; 
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id")
-    private Department department;
+    @OneToMany(
+    		mappedBy = "employee",
+    		cascade = CascadeType.ALL, 
+            fetch = FetchType.LAZY
+    )
+    private List<Appointment> appointments; 
     
-    @OneToOne(mappedBy = "manager") 
-    private Department managedDepartment;
+    @OneToMany(
+    		mappedBy = "signer",
+            fetch = FetchType.LAZY
+    )
+    private List<Decision> signedDecisions;
+    
+    @OneToMany(mappedBy = "manager")
+    private List<Department> managedDepartments;
 }
