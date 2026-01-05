@@ -5,6 +5,8 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -26,6 +28,7 @@ import vn.edu.hust.vha.hims.modules.contract.entity.Contract;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Decision extends BaseEntity{
+	@Enumerated(EnumType.STRING)
     @Column(name = "decision_type", nullable = false)
 	private DecisionType decisionType;
 	
