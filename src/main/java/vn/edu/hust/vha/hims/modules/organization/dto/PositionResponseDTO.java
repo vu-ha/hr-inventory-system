@@ -16,5 +16,5 @@ public class PositionResponseDTO {
 	private UUID id;
 	private String name;
 	private String description;
-	private PositionLevel level;
+	private String jobGradeName;
 }
