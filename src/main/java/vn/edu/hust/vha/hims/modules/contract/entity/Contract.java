@@ -2,7 +2,6 @@ package vn.edu.hust.vha.hims.modules.contract.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,12 +34,13 @@ public class Contract extends BaseEntity {
     @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
     
+    @Enumerated(EnumType.STRING)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contract_type_id", nullable = false)
     private ContractType contractType;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "decision_id")
+    @JoinColumn(name = "decision_id", nullable = true)
     private Decision decision;
     
     /**
