@@ -1,4 +1,4 @@
-package vn.edu.hust.vha.hims.modules.organization.dto;
+package vn.edu.hust.vha.hims.modules.organization.dto.response;
 
 import java.util.UUID;
 

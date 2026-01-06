@@ -13,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +28,7 @@ import vn.edu.hust.vha.hims.modules.contract.entity.Contract;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Decision extends BaseEntity{
 	@Enumerated(EnumType.STRING)
     @Column(name = "decision_type", nullable = false)
@@ -41,13 +43,13 @@ public class Decision extends BaseEntity{
     @Column(name = "decision_url", nullable = false, unique = true)
 	private String decisionURL;
 	
-    @Column(name = "signed_date", nullable = false, unique = true)
+    @Column(name = "signed_date", nullable = false)
 	private LocalDate signedDate;
     
-    @Column(name = "effective_date", nullable = false, unique = true)
+    @Column(name = "effective_date", nullable = false)
 	private LocalDate effectiveDate;
     
-    @Column(name = "expired_date", nullable = false, unique = true)
+    @Column(name = "expired_date", nullable = false)
 	private LocalDate expiredDate;
 	
     @ManyToOne(fetch = FetchType.LAZY)
