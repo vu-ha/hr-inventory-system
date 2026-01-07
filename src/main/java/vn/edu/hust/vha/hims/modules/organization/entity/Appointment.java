@@ -1,5 +1,6 @@
 package vn.edu.hust.vha.hims.modules.organization.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -12,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -53,5 +55,11 @@ public class Appointment extends BaseEntity{
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 	
+	@Default
+	@Column(name = "is_primary", nullable = false)
+	private boolean isPrimary = false;
+	
+	@Column(name = "salary_percentage", precision = 5, scale = 2)
+	private BigDecimal salaryPercentage;
 	
 }
