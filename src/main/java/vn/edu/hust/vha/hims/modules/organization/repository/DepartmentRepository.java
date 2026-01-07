@@ -5,8 +5,8 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import vn.edu.hust.vha.hims.modules.organization.entity.Decision;
+import vn.edu.hust.vha.hims.modules.organization.entity.Department;
 @Repository
-public interface DecisionRepository extends JpaRepository<Decision, UUID>{
+public interface DepartmentRepository extends JpaRepository<Department, UUID>{
 
 }
