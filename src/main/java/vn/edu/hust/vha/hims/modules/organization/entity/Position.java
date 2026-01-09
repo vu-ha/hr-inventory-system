@@ -47,6 +47,9 @@ public class Position {
     @JoinColumn(name = "job_grade_id", nullable = false)
     private JobGrade jobGrade;
     
+    @Column(name = "management_level", nullable = false)
+    private Integer managementLevel;
+    
     @OneToMany(
     		mappedBy = "position",
     		//cascade = CascadeType.ALL, 

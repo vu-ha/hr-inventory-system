@@ -13,6 +13,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -20,6 +22,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import vn.edu.hust.vha.hims.common.entity.Employee;
 import vn.edu.hust.vha.hims.common.enumeration.ProjectStatus;
 
 
@@ -51,16 +54,21 @@ public class Project {
     @Column(name = "expected_end_date")
     private LocalDate expectedEndDate;
 
-    // Giả định bạn đã tạo Enum ProjectStatus với các giá trị PLANNED, ONGOING, COMPLETED, CANCELLED
     @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 20)
     private ProjectStatus status;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id")
+    private Employee manager;
 
-    // Mối quan hệ One-to-Many với ProjectMember
     @OneToMany(
-        mappedBy = "project", // Tên trường Project trong ProjectMember
-        cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY
-    )
-    private List<ProjectMember> members;
+            mappedBy = "projectEntity",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,      
+            fetch = FetchType.LAZY
+        )
+        private List<ProjectMember> members;
 }
+
+// Nên bổ sung Ngày kết thúc thực tế

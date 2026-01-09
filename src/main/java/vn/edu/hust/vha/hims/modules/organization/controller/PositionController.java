@@ -25,7 +25,8 @@ public class PositionController {
     	List<Position> positions = positionRepository.findAll();
         // map sang DTO
         List<PositionResponseDTO> dtos = positions.stream()
-            .map(p -> new PositionResponseDTO(p.getId(), p.getName(), p.getDescription(), p.getJobGrade().getName()))
+            .map(p -> new PositionResponseDTO(p.getId(), p.getName(), p.getDescription(), 
+            		                          p.getJobGrade().getName(), p.getManagementLevel()))
             .toList();
 
         return ResponseEntity.ok(dtos);
