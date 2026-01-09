@@ -14,7 +14,8 @@ public class PositionServiceImpl implements PositionService {
 	public List<PositionResponseDTO> getAllPosition() {
 	    List<Position> positions = positionRepository.findAll();
 	    return positions.stream()
-	            .map(p -> new PositionResponseDTO(p.getId(), p.getName(), p.getDescription(),p.getJobGrade().getName()))
+	            .map(p -> new PositionResponseDTO(p.getId(), p.getName(), p.getDescription(), 
+	            		                          p.getJobGrade().getName(), p.getManagementLevel()))
 	            .toList();
 	}
 

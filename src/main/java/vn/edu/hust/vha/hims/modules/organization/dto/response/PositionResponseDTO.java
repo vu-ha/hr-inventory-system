@@ -16,4 +16,5 @@ public class PositionResponseDTO {
 	private String name;
 	private String description;
 	private String jobGradeName;
+	private int managementLevel;
 }

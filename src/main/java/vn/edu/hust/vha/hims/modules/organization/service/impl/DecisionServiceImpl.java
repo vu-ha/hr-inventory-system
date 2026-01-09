@@ -11,6 +11,7 @@ import vn.edu.hust.vha.hims.modules.organization.dto.request.DecisionCreateDTO;
 import vn.edu.hust.vha.hims.modules.organization.dto.response.DecisionResponseDTO;
 import vn.edu.hust.vha.hims.modules.organization.entity.Decision;
 import vn.edu.hust.vha.hims.modules.organization.repository.DecisionRepository;
+import vn.edu.hust.vha.hims.modules.organization.repository.PositionRepository;
 import vn.edu.hust.vha.hims.modules.organization.service.DecisionService;
 
 @Service
@@ -18,6 +19,7 @@ import vn.edu.hust.vha.hims.modules.organization.service.DecisionService;
 public class DecisionServiceImpl implements DecisionService{
 	private final DecisionRepository decisionRepository; 
 	private final EmployeeRepository employeeRepository;
+	private final PositionRepository positionRepository;
 	
     @Override
     @Transactional
@@ -29,9 +31,16 @@ public class DecisionServiceImpl implements DecisionService{
     	Employee signer = employeeRepository.findById(dto.getSignerId())
     	        .orElseThrow(() -> new RuntimeException("Signer (Employee) not found"));
     	
-    	/**
-    	 * Cần check thêm điều kiện: có thể signer phải cấp cao hơn employee
-    	 */
+    	Integer employeeLevel = positionRepository.findHighestLevelByEmployeeId(employee.getId());
+    	Integer signerLevel = positionRepository.findHighestLevelByEmployeeId(signer.getId());
+    	
+    	if (signerLevel == null || employeeLevel == null) {
+    	    throw new RuntimeException("Nhân viên hoặc người ký chưa được bổ nhiệm vị trí chính thức");
+    	}
+
+    	if (signerLevel >= employeeLevel) {
+    	    throw new RuntimeException("Người ký phải có cấp bậc cao hơn người nhận quyết định (Level " + signerLevel + " không thể ký cho Level " + employeeLevel + ")");
+    	}
     	
     	Decision decision = Decision.builder()
     		.employee(employee)

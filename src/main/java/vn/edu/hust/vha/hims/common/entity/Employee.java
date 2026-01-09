@@ -84,7 +84,7 @@ public class Employee {
     private String hometown;
     
     @Column(name = "year_of_joining")
-    private short yearJoining;
+    private Short yearJoining;
     
     @OneToMany(
     		mappedBy = "employee",
