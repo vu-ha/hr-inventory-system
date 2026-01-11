@@ -2,8 +2,8 @@ package vn.edu.hust.vha.hims.modules.organization.service.impl;
 
 import java.util.List;
 
-import vn.edu.hust.vha.hims.modules.organization.dto.response.PositionResponseDTO;
 import vn.edu.hust.vha.hims.modules.organization.entity.Position;
+import vn.edu.hust.vha.hims.modules.organization.mapper.dto.response.PositionResponseDTO;
 import vn.edu.hust.vha.hims.modules.organization.repository.PositionRepository;
 import vn.edu.hust.vha.hims.modules.organization.service.PositionService;
 

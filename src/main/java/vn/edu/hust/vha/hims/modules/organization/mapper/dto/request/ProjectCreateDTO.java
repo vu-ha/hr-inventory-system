@@ -1,4 +1,4 @@
-package vn.edu.hust.vha.hims.modules.organization.dto.request;
+package vn.edu.hust.vha.hims.modules.organization.mapper.dto.request;
 
 import java.time.LocalDate;
 import java.util.UUID;

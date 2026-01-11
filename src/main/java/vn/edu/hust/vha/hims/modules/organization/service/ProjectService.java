@@ -3,10 +3,10 @@ package vn.edu.hust.vha.hims.modules.organization.service;
 import java.util.List;
 import java.util.UUID;
 
-import vn.edu.hust.vha.hims.modules.organization.dto.request.ProjectCreateDTO;
-import vn.edu.hust.vha.hims.modules.organization.dto.response.ProjectMemberResponseDTO;
-import vn.edu.hust.vha.hims.modules.organization.dto.response.ProjectResponseDTO;
-import vn.edu.hust.vha.hims.modules.organization.dto.response.ProjectSummaryDTO;
+import vn.edu.hust.vha.hims.modules.organization.mapper.dto.request.ProjectCreateDTO;
+import vn.edu.hust.vha.hims.modules.organization.mapper.dto.response.ProjectMemberResponseDTO;
+import vn.edu.hust.vha.hims.modules.organization.mapper.dto.response.ProjectResponseDTO;
+import vn.edu.hust.vha.hims.modules.organization.mapper.dto.response.ProjectSummaryDTO;
 
 public interface ProjectService {
 	ProjectResponseDTO createProject(ProjectCreateDTO dto);

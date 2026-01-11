@@ -17,11 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import vn.edu.hust.vha.hims.modules.organization.dto.request.ProjectCreateDTO;
-import vn.edu.hust.vha.hims.modules.organization.dto.response.ProjectMemberResponseDTO;
-import vn.edu.hust.vha.hims.modules.organization.dto.response.ProjectResponseDTO;
-import vn.edu.hust.vha.hims.modules.organization.dto.response.ProjectSummaryDTO;
-import vn.edu.hust.vha.hims.modules.organization.projection.ProjectSummary;
+import vn.edu.hust.vha.hims.modules.organization.mapper.dto.request.ProjectCreateDTO;
+import vn.edu.hust.vha.hims.modules.organization.mapper.dto.response.ProjectMemberResponseDTO;
+import vn.edu.hust.vha.hims.modules.organization.mapper.dto.response.ProjectResponseDTO;
+import vn.edu.hust.vha.hims.modules.organization.mapper.dto.response.ProjectSummaryDTO;
 import vn.edu.hust.vha.hims.modules.organization.service.ProjectService;
 
 @RestController
@@ -59,7 +58,7 @@ public class ProjectController {
             @PathVariable UUID projectId, 
             @PathVariable UUID employeeId) {
         projectService.removeMemberFromProject(projectId, employeeId);
-        return ResponseEntity.noContent().build(); // Trả về 204 No Content
+        return ResponseEntity.noContent().build();
     }
 
     // Xóa hẳn dự án

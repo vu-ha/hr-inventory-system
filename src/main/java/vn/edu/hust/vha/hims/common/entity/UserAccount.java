@@ -2,14 +2,10 @@ package vn.edu.hust.vha.hims.common.entity;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -21,12 +17,7 @@ import lombok.Setter;
 @Table(name = "user_account", schema = "hrm")
 @Getter
 @Setter
-public class UserAccount{
-	@Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
-    private UUID id;
-	
+public class UserAccount extends BaseEntity{
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", unique = true)
     private Employee employee;
