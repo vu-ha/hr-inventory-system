@@ -1,6 +1,7 @@
 package vn.edu.hust.vha.hims.modules.organization.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -61,14 +62,15 @@ public class Project {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id")
     private Employee manager;
-
+    
+    @Builder.Default
     @OneToMany(
             mappedBy = "projectEntity",
             cascade = CascadeType.ALL,
             orphanRemoval = true,      
             fetch = FetchType.LAZY
         )
-        private List<ProjectMember> members;
+     private List<ProjectMember> members = new ArrayList<>();
 }
 
 // Nên bổ sung Ngày kết thúc thực tế

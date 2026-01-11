@@ -1,40 +1,35 @@
 package vn.edu.hust.vha.hims.modules.notification.entity;
 
-import vn.edu.hust.vha.hims.common.entity.BaseEntity;
-import vn.edu.hust.vha.hims.common.enumeration.NotificationPriority;
-import vn.edu.hust.vha.hims.common.enumeration.NotificationType;
-
-import java.util.List;
 import jakarta.persistence.*;
 import lombok.*;
+import vn.edu.hust.vha.hims.common.entity.Employee;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
-@Entity
-@Table(name = "notification", schema = "hrm")
-@Getter 
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Notification extends BaseEntity {  
-    @Column(name = "title", nullable = false)
+@Entity
+@Table(name = "notification", schema = "hrm")
+@Getter
+@Setter
+public class Notification {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
+    @Column(nullable = false)
     private String title;
-    
-    @Column(name = "content", nullable = false, columnDefinition = "TEXT")
+
+    @Column(columnDefinition = "TEXT")
     private String content;
-    
-    @Enumerated(EnumType.STRING)
-    @Column(name = "type", nullable = false)
-    private NotificationType type; 
-    
-    @Enumerated(EnumType.STRING)
-    @Column(name = "priority", nullable = false)
-    private NotificationPriority priority; 
-    
-    @OneToMany(
-        mappedBy = "notification", 
-        cascade = CascadeType.ALL, 
-        orphanRemoval = true,
-        fetch = FetchType.LAZY
-    )
-    private List<NotificationRecipient> recipients;
+
+    private String type;
+    private UUID referenceId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sender_id")
+    private Employee sender;
+
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 }

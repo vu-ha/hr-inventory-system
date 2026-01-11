@@ -1,6 +1,7 @@
 package vn.edu.hust.vha.hims.modules.organization.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -20,7 +21,9 @@ import lombok.Setter;
 import vn.edu.hust.vha.hims.common.entity.BaseEntity;
 import vn.edu.hust.vha.hims.common.entity.Employee;
 import vn.edu.hust.vha.hims.common.enumeration.DecisionType;
+import vn.edu.hust.vha.hims.modules.compensation.entity.RewardViolation;
 import vn.edu.hust.vha.hims.modules.contract.entity.Contract;
+import vn.edu.hust.vha.hims.modules.payroll.entity.EmployeeAllowance;
 
 @Entity
 @Table(name = "decision", schema = "hrm") 
@@ -60,16 +63,19 @@ public class Decision extends BaseEntity{
     @JoinColumn(name = "signer_id", nullable = false)
     private Employee signer;
     
-    @OneToMany(
-            mappedBy = "decision", 
-            fetch = FetchType.LAZY
-            //cascade = CascadeType.ALL 
-        )
-    private List<Appointment> appointments;
+    @Builder.Default
+    @OneToMany(mappedBy = "decision", fetch = FetchType.LAZY)
+    private List<Appointment> appointments = new ArrayList<>();
     
-    @OneToMany(
-    	    mappedBy = "decision",
-    	    fetch = FetchType.LAZY
-    	)
-    private List<Contract> contracts;
+    @Builder.Default
+    @OneToMany( mappedBy = "decision", fetch = FetchType.LAZY)
+    private List<Contract> contracts = new ArrayList<>();
+    
+    @Builder.Default
+    @OneToMany(mappedBy = "decision", fetch = FetchType.LAZY)
+    private List<RewardViolation> rewardViolations = new ArrayList<>();
+    
+    @Builder.Default
+    @OneToMany(mappedBy = "decision", fetch = FetchType.LAZY)
+    private List<EmployeeAllowance> employeeAllowances = new ArrayList<>();
 }

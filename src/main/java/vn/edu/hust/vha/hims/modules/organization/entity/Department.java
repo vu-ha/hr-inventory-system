@@ -1,5 +1,6 @@
 package vn.edu.hust.vha.hims.modules.organization.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -55,16 +56,11 @@ public class Department {
     @JoinColumn(name = "parent_id")
     private Department parent;
 
-    @OneToMany(
-    		mappedBy = "parent",
-            fetch = FetchType.LAZY
-    ) 
-    private List<Department> children;
+    @Builder.Default
+    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY) 
+    private List<Department> children = new ArrayList<>();
     
-    @OneToMany(
-    		mappedBy = "department",
-    		//cascade = CascadeType.ALL, 
-            fetch = FetchType.LAZY
-    )
-    private List<Appointment> appointments; 
+    @Builder.Default
+    @OneToMany(mappedBy = "department",fetch = FetchType.LAZY)
+    private List<Appointment> appointments = new ArrayList<>();
 }
