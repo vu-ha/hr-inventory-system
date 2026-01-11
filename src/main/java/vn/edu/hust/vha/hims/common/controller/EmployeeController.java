@@ -1,34 +1,32 @@
 package vn.edu.hust.vha.hims.common.controller;
 
-import java.util.List;
-import java.util.UUID;
-
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import vn.edu.hust.vha.hims.common.dto.response.EmployeeResponseDTO;
-import vn.edu.hust.vha.hims.common.service.impl.EmployeeServiceImpl;
+import vn.edu.hust.vha.hims.common.mapper.dto.request.EmployeeCreateDTO;
+import vn.edu.hust.vha.hims.common.mapper.dto.response.EmployeeResponseDTO;
+import vn.edu.hust.vha.hims.common.service.EmployeeService;
 
 @RestController
-@RequestMapping("/api/employees")
+@RequestMapping("/api/v1/employees")
 @RequiredArgsConstructor
 public class EmployeeController {
-	private final EmployeeServiceImpl employeeServiceImpl;
-	
-	@GetMapping("/{departmentId}")
-    public ResponseEntity<List<EmployeeResponseDTO>> getEmployeesByDept(
-            @PathVariable UUID departmentId) {
-        
-        List<EmployeeResponseDTO> employees = employeeServiceImpl.getEmployeesByDepartment(departmentId);
-        
-        if (employees.isEmpty()) {
-            return ResponseEntity.noContent().build(); // Trả về 204 nếu không có dữ liệu
-        }
-        
-        return ResponseEntity.ok(employees); // Trả về 200 OK kèm danh sách
+
+    private final EmployeeService employeeService;
+
+    /**
+     * API tạo mới nhân viên
+     */
+    @PostMapping
+    public ResponseEntity<EmployeeResponseDTO> createEmployee(@Valid @RequestBody EmployeeCreateDTO dto) {
+        EmployeeResponseDTO response = employeeService.createEmployee(dto);
+        // Trả về mã 201 Created cùng dữ liệu đã tạo
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 }

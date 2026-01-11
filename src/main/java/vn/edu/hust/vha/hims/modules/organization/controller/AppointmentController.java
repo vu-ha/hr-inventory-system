@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vn.edu.hust.vha.hims.modules.organization.dto.request.AppointmentCreateDTO;
-import vn.edu.hust.vha.hims.modules.organization.dto.response.AppointmentResponseDTO;
+
+import vn.edu.hust.vha.hims.modules.organization.mapper.dto.request.AppointmentCreateDTO;
+import vn.edu.hust.vha.hims.modules.organization.mapper.dto.response.AppointmentResponseDTO;
 import vn.edu.hust.vha.hims.modules.organization.service.AppointmentService;
 
 @RestController
@@ -28,7 +29,6 @@ public class AppointmentController {
         // Gọi service xử lý logic nghiệp vụ phức tạp đã viết
         AppointmentResponseDTO response = appointmentService.createAppointment(dto);
         
-        // Trả về 201 Created kèm dữ liệu đã tạo
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 }

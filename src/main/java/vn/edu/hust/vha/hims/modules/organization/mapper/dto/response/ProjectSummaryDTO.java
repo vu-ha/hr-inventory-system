@@ -1,4 +1,4 @@
-package vn.edu.hust.vha.hims.modules.organization.dto.response;
+package vn.edu.hust.vha.hims.modules.organization.mapper.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

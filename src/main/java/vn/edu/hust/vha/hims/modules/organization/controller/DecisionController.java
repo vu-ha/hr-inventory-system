@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import vn.edu.hust.vha.hims.modules.organization.dto.request.DecisionCreateDTO;
-import vn.edu.hust.vha.hims.modules.organization.dto.response.DecisionResponseDTO;
+import vn.edu.hust.vha.hims.modules.organization.mapper.dto.request.DecisionCreateDTO;
+import vn.edu.hust.vha.hims.modules.organization.mapper.dto.response.DecisionResponseDTO;
 import vn.edu.hust.vha.hims.modules.organization.service.DecisionService;
 
 @RestController

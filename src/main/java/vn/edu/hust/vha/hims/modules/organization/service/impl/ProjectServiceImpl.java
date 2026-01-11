@@ -16,12 +16,12 @@ import vn.edu.hust.vha.hims.common.enumeration.ProjectRole;
 import vn.edu.hust.vha.hims.common.enumeration.ProjectStatus;
 import vn.edu.hust.vha.hims.common.key.ProjectMemberId;
 import vn.edu.hust.vha.hims.common.repository.EmployeeRepository;
-import vn.edu.hust.vha.hims.modules.organization.dto.request.ProjectCreateDTO;
-import vn.edu.hust.vha.hims.modules.organization.dto.response.ProjectMemberResponseDTO;
-import vn.edu.hust.vha.hims.modules.organization.dto.response.ProjectResponseDTO;
-import vn.edu.hust.vha.hims.modules.organization.dto.response.ProjectSummaryDTO;
 import vn.edu.hust.vha.hims.modules.organization.entity.Project;
 import vn.edu.hust.vha.hims.modules.organization.entity.ProjectMember;
+import vn.edu.hust.vha.hims.modules.organization.mapper.dto.request.ProjectCreateDTO;
+import vn.edu.hust.vha.hims.modules.organization.mapper.dto.response.ProjectMemberResponseDTO;
+import vn.edu.hust.vha.hims.modules.organization.mapper.dto.response.ProjectResponseDTO;
+import vn.edu.hust.vha.hims.modules.organization.mapper.dto.response.ProjectSummaryDTO;
 import vn.edu.hust.vha.hims.modules.organization.repository.ProjectMemberRepository;
 import vn.edu.hust.vha.hims.modules.organization.repository.ProjectRepository;
 import vn.edu.hust.vha.hims.modules.organization.service.ProjectService;
@@ -103,7 +103,6 @@ public class ProjectServiceImpl implements ProjectService{
 	    ProjectMember member = projectMemberRepository.findById(id)
 	            .orElseThrow(() -> new RuntimeException("Thành viên không tồn tại trong dự án"));
 
-	    // Chuyển String sang Enum
 	    member.setRoleInProject(ProjectRole.valueOf(newRole.toUpperCase()));
 	    
 	    return convertToResponseDTO(member);

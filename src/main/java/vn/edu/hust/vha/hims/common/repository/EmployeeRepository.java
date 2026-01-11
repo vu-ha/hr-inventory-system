@@ -7,26 +7,27 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import vn.edu.hust.vha.hims.common.dto.response.EmployeeResponseDTO;
 import vn.edu.hust.vha.hims.common.entity.Employee;
+import vn.edu.hust.vha.hims.common.mapper.dto.response.EmployeeSummaryDTO;
+
 
 public interface EmployeeRepository extends JpaRepository<Employee, UUID>{
 	@Query("""
-		    SELECT new vn.edu.hust.vha.hims.common.dto.response.EmployeeResponseDTO(
+		    SELECT new vn.edu.hust.vha.hims.common.mapper.dto.response.EmployeeSummaryDTO(
 		        e.id,
 		        CONCAT(e.firstName, ' ', e.lastName),
 		        e.gender,
 		        e.email,
 		        e.phoneNumber,
-		        p.name,
-		        d.name
+				p.managementLevel,
+				p.name
 		    )
-		    FROM Appointment a
-		    JOIN a.employee e
-		    JOIN a.department d
-		    JOIN a.position p
-		    WHERE d.id = :departmentId
-		        AND a.endDate IS NULL
+		    FROM Appointment ap
+			JOIN ap.employee e
+			JOIN ap.position p
+			JOIN ap.department d
+		    WHERE ap.isPrimary = true AND ap.endDate is null
+		    	AND d.id = :departmentId
 		    """)
-		List<EmployeeResponseDTO> findAllEmployee(@Param("departmentId") UUID departmentId);
+		List<EmployeeSummaryDTO> findAllEmployee(@Param("departmentId") UUID departmentId);
 }

@@ -13,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +27,8 @@ import vn.edu.hust.vha.hims.modules.notification.entity.NotificationRecipient;
 import vn.edu.hust.vha.hims.modules.organization.entity.Appointment;
 import vn.edu.hust.vha.hims.modules.organization.entity.Decision;
 import vn.edu.hust.vha.hims.modules.organization.entity.Department;
+import vn.edu.hust.vha.hims.modules.payroll.entity.Payroll;
+import vn.edu.hust.vha.hims.modules.payroll.entity.SalaryHistory;
 
 @Entity
 @Table(name = "employee", schema = "hrm") 
@@ -119,6 +122,19 @@ public class Employee {
     	)
     private List<Contract> contracts;
     
-    @OneToMany(mappedBy = "manager")
+    @OneToMany(mappedBy = "manager", fetch = FetchType.LAZY)
     private List<Department> managedDepartments;
+    
+    @OneToMany(mappedBy = "employee", 
+    		   fetch = FetchType.LAZY
+    )
+    private List<SalaryHistory> salaryHistories;
+    
+    @OneToMany(mappedBy = "employee", 
+ 		   fetch = FetchType.LAZY
+    )
+    private List<Payroll> payrolls;
+    
+    @OneToOne(mappedBy = "employee") 
+    private UserAccount userAccount;
 }

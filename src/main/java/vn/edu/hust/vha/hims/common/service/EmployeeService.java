@@ -1,10 +1,8 @@
 package vn.edu.hust.vha.hims.common.service;
 
-import java.util.List;
-import java.util.UUID;
-
-import vn.edu.hust.vha.hims.common.dto.response.EmployeeResponseDTO;
+import vn.edu.hust.vha.hims.common.mapper.dto.request.EmployeeCreateDTO;
+import vn.edu.hust.vha.hims.common.mapper.dto.response.EmployeeResponseDTO;
 
 public interface EmployeeService {
-	public List<EmployeeResponseDTO> getEmployeesByDepartment(UUID departmentId);
+	public EmployeeResponseDTO createEmployee(EmployeeCreateDTO dto);
 }

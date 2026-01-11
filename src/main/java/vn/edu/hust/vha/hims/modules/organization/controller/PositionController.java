@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import vn.edu.hust.vha.hims.modules.organization.dto.response.PositionResponseDTO;
 import vn.edu.hust.vha.hims.modules.organization.entity.Position;
+import vn.edu.hust.vha.hims.modules.organization.mapper.dto.response.PositionResponseDTO;
 import vn.edu.hust.vha.hims.modules.organization.repository.PositionRepository;
 
 
