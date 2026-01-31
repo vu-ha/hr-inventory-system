@@ -1,15 +1,16 @@
 package vn.edu.hust.vha.hims.modules.attendance.entity;
 
+import java.time.LocalTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import vn.edu.hust.vha.hims.common.entity.BaseEntity;
-
-import java.time.LocalTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,6 +18,7 @@ import java.time.LocalTime;
 @Table(name = "shift", schema = "hrm")
 @Getter
 @Setter
+@Builder
 public class Shift extends BaseEntity {
 
     @Column(name = "name", nullable = false, length = 50)
@@ -29,5 +31,5 @@ public class Shift extends BaseEntity {
     private LocalTime endTime;
 
     @Column(name = "work_day")
-    private Float workDay = 1.0f;
+    private Float workDay;
 }

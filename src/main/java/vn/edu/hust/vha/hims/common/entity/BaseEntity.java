@@ -37,10 +37,10 @@ public abstract class BaseEntity {
     private UUID createdBy;
 
     @LastModifiedDate
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", insertable = false) // NULL khi insert, chỉ có giá trị khi update
     private LocalDateTime updatedAt;
 
     @LastModifiedBy
-    @Column(name = "updated_by")
+    @Column(name = "updated_by", insertable = false) // NULL khi insert
     private UUID updatedBy;
 }

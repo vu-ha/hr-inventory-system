@@ -25,6 +25,7 @@ import vn.edu.hust.vha.hims.common.enumeration.Gender;
 import vn.edu.hust.vha.hims.common.enumeration.MaritalStatus;
 import vn.edu.hust.vha.hims.modules.attendance.entity.LeaveRequest;
 import vn.edu.hust.vha.hims.modules.attendance.entity.ShiftAssignment;
+import vn.edu.hust.vha.hims.modules.auth.entity.UserAccount;
 import vn.edu.hust.vha.hims.modules.compensation.entity.RewardViolation;
 import vn.edu.hust.vha.hims.modules.contract.entity.Contract;
 import vn.edu.hust.vha.hims.modules.notification.entity.Notification;
