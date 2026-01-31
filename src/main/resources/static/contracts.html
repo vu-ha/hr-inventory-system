@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Hợp đồng - HIMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen flex">
+        <aside class="w-64 bg-white shadow-lg fixed h-full">
+            <div class="p-6">
+                <h1 class="text-2xl font-bold text-blue-600">HIMS</h1>
+                <p class="text-sm text-gray-500 mt-1">Quản lý Nhân sự</p>
+            </div>
+            <nav class="mt-6 px-4">
+                <a href="/dashboard.html" class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 mb-2">
+                    <i class="fas fa-chart-line mr-3"></i> Dashboard
+                </a>
+                <a href="/employees.html" class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 mb-2">
+                    <i class="fas fa-users mr-3"></i> Nhân viên
+                </a>
+                <a href="/departments.html" class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 mb-2">
+                    <i class="fas fa-building mr-3"></i> Phòng ban
+                </a>
+                <a href="/positions.html" class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 mb-2">
+                    <i class="fas fa-briefcase mr-3"></i> Vị trí
+                </a>
+                <a href="/projects.html" class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 mb-2">
+                    <i class="fas fa-project-diagram mr-3"></i> Dự án
+                </a>
+                <a href="/decisions.html" class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 mb-2">
+                    <i class="fas fa-file-signature mr-3"></i> Quyết định
+                </a>
+                <a href="/appointments.html" class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 mb-2">
+                    <i class="fas fa-user-tie mr-3"></i> Bổ nhiệm
+                </a>
+                <a href="/contracts.html" class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 mb-2 bg-blue-50">
+                    <i class="fas fa-file-contract mr-3"></i> Hợp đồng
+                </a>
+            </nav>
+            <div class="absolute bottom-0 w-64 p-4 border-t">
+                <a href="/logout" class="flex items-center px-4 py-2 text-red-600 rounded-lg hover:bg-red-50">
+                    <i class="fas fa-sign-out-alt mr-3"></i> Đăng xuất
+                </a>
+            </div>
+        </aside>
+        <main class="flex-1 ml-64">
+            <div class="p-8" id="content">
+                <p>Đang tải...</p>
+            </div>
+        </main>
+    </div>
+    <script src="/js/api.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>

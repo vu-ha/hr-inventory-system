@@ -1,0 +1,49 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(title='Tạo Hợp đồng', content=~{::content})}">
+    <div th:fragment="content">
+        <div class="mb-6">
+            <a href="/contracts" class="text-blue-600 hover:text-blue-800 mb-4 inline-block">
+                <i class="fas fa-arrow-left mr-2"></i>Quay lại
+            </a>
+            <h1 class="text-3xl font-bold text-gray-900">Tạo Hợp đồng Mới</h1>
+        </div>
+
+        <form action="/contracts" method="post" class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Nhân viên <span class="text-red-500">*</span></label>
+                    <select name="employeeId" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="">Chọn nhân viên</option>
+                        <option th:each="emp : ${employees}" 
+                                th:value="${emp.id}" 
+                                th:text="${emp.fullName ?: emp.employeeCode}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Loại hợp đồng <span class="text-red-500">*</span></label>
+                    <select name="contractType" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="INDEFINITE">Không xác định thời hạn</option>
+                        <option value="DEFINITE">Xác định thời hạn</option>
+                        <option value="SEASONAL">Theo mùa vụ</option>
+                        <option value="PART_TIME">Bán thời gian</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Ngày bắt đầu <span class="text-red-500">*</span></label>
+                    <input type="date" name="startDate" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Ngày kết thúc</label>
+                    <input type="date" name="endDate"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+            <div class="flex items-center justify-end space-x-4 mt-6 pt-6 border-t">
+                <a href="/contracts" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Hủy</a>
+                <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    <i class="fas fa-save mr-2"></i>Lưu
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

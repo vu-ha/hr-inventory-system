@@ -1,0 +1,55 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(title='Tạo Quyết định', content=~{::content})}">
+    <div th:fragment="content">
+        <div class="mb-6">
+            <a href="/decisions" class="text-blue-600 hover:text-blue-800 mb-4 inline-block">
+                <i class="fas fa-arrow-left mr-2"></i>Quay lại
+            </a>
+            <h1 class="text-3xl font-bold text-gray-900">Tạo Quyết định Mới</h1>
+        </div>
+
+        <form th:action="${decision.id != null ? '/decisions/' + decision.id : '/decisions'}" 
+              method="post"
+              class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Số quyết định <span class="text-red-500">*</span></label>
+                    <input type="text" name="decisionNumber" th:value="${decision?.decisionNumber}" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Loại quyết định <span class="text-red-500">*</span></label>
+                    <select name="decisionType" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="APPOINT">Bổ nhiệm</option>
+                        <option value="DISMISS">Miễn nhiệm</option>
+                        <option value="TRANSFER">Điều chuyển</option>
+                        <option value="CONTRACT_SIGN">Ký hợp đồng</option>
+                        <option value="TERMINATE">Chấm dứt</option>
+                        <option value="ALLOWANCE_CHANGE">Thay đổi phụ cấp</option>
+                        <option value="SALARY_CHANGE">Thay đổi lương</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Ngày ký <span class="text-red-500">*</span></label>
+                    <input type="date" name="signDate" th:value="${decision?.signDate}" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Ngày có hiệu lực <span class="text-red-500">*</span></label>
+                    <input type="date" name="effectiveDate" th:value="${decision?.effectiveDate}" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Nội dung</label>
+                    <textarea name="content" rows="4" th:text="${decision?.content}"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+            </div>
+            <div class="flex items-center justify-end space-x-4 mt-6 pt-6 border-t">
+                <a href="/decisions" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Hủy</a>
+                <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    <i class="fas fa-save mr-2"></i>Lưu
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(title='Quản lý Dự án', content=~{::content})}">
+    <div th:fragment="content">
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-3xl font-bold text-gray-900">Quản lý Dự án</h1>
+            <button onclick="showCreateModal()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                <i class="fas fa-plus mr-2"></i>Tạo dự án
+            </button>
+        </div>
+
+        <div th:if="${projects != null and !projects.isEmpty()}">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div th:each="project : ${projects}" 
+                     class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="p-3 bg-purple-100 rounded-lg">
+                                <i class="fas fa-project-diagram text-purple-600 text-2xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-900" th:text="${project.name != null ? project.name : (project.projectName != null ? project.projectName : 'N/A')}"></h3>
+                                <p class="text-sm text-gray-500" th:text="${project.code != null ? project.code : (project.projectCode != null ? project.projectCode : '')}"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <p th:if="${project.description != null}" class="text-sm text-gray-600 mb-4" th:text="${project.description}"></p>
+                    <div class="flex items-center justify-between pt-4 border-t">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-users mr-2"></i>
+                            <span th:text="${(project.memberCount != null ? project.memberCount : (project.numberOfMembers != null ? project.numberOfMembers : 0)) + ' thành viên'}"></span>
+                        </div>
+                                <a th:href="@{/projects/{id}(id=${project.id != null ? project.id : project.projectId})}" 
+                           class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                            Xem chi tiết <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div th:if="${projects == null or projects.isEmpty()}" class="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
+            <i class="fas fa-inbox text-4xl text-gray-400 mb-4"></i>
+            <p class="text-gray-500">Không có dự án nào</p>
+        </div>
+    </div>
+</div>

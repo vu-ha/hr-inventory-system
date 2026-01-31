@@ -1,0 +1,40 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(title='Quản lý Phòng ban', content=~{::content})}">
+    <div th:fragment="content">
+        <h1 class="text-3xl font-bold text-gray-900 mb-6">Quản lý Phòng ban</h1>
+        
+        <div th:if="${departments != null and !departments.isEmpty()}">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div th:each="dept : ${departments}" 
+                     class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="p-3 bg-blue-100 rounded-lg">
+                                <i class="fas fa-building text-blue-600 text-2xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-900" th:text="${dept.departmentName != null ? dept.departmentName : (dept.name != null ? dept.name : 'N/A')}"></h3>
+                                <p class="text-sm text-gray-500" th:text="${dept.code != null ? dept.code : ''}"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <p th:if="${dept.description != null}" class="text-sm text-gray-600 mb-4" th:text="${dept.description}"></p>
+                    <div class="flex items-center justify-between pt-4 border-t">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-users mr-2"></i>
+                            <span th:text="${(dept.numberCount != null ? dept.numberCount : (dept.employeeCount != null ? dept.employeeCount : 0)) + ' nhân viên'}"></span>
+                        </div>
+                                <a th:href="@{/departments/{id}(id=${dept.departmentId != null ? dept.departmentId : dept.id})}" 
+                           class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                            Xem chi tiết <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div th:if="${departments == null or departments.isEmpty()}" class="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
+            <i class="fas fa-inbox text-4xl text-gray-400 mb-4"></i>
+            <p class="text-gray-500">Không có phòng ban nào</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(title='Dashboard', content=~{::content})}">
+    <div th:fragment="content">
+        <h1 class="text-3xl font-bold text-gray-900 mb-6">Dashboard</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600">Tổng nhân viên</p>
+                        <p class="text-3xl font-bold text-gray-900" th:text="${stats?.totalEmployees ?: 0}">0</p>
+                    </div>
+                    <div class="bg-blue-100 p-3 rounded-lg">
+                        <i class="fas fa-users text-blue-600 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600">Phòng ban</p>
+                        <p class="text-3xl font-bold text-gray-900" th:text="${stats?.totalDepartments ?: 0}">0</p>
+                    </div>
+                    <div class="bg-green-100 p-3 rounded-lg">
+                        <i class="fas fa-building text-green-600 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600">Dự án</p>
+                        <p class="text-3xl font-bold text-gray-900" th:text="${stats?.totalProjects ?: 0}">0</p>
+                    </div>
+                    <div class="bg-purple-100 p-3 rounded-lg">
+                        <i class="fas fa-project-diagram text-purple-600 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600">Vị trí</p>
+                        <p class="text-3xl font-bold text-gray-900" th:text="${stats?.totalPositions ?: 0}">0</p>
+                    </div>
+                    <div class="bg-orange-100 p-3 rounded-lg">
+                        <i class="fas fa-briefcase text-orange-600 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6">
+            <h2 class="text-xl font-semibold mb-4">Thao tác nhanh</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <a href="/employees/new" class="p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition">
+                    <p class="font-medium">Thêm nhân viên mới</p>
+                    <p class="text-sm text-gray-500 mt-1">Tạo hồ sơ nhân viên</p>
+                </a>
+                <a href="/decisions/new" class="p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition">
+                    <p class="font-medium">Tạo quyết định</p>
+                    <p class="text-sm text-gray-500 mt-1">Tạo quyết định mới</p>
+                </a>
+                <a href="/projects" class="p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition">
+                    <p class="font-medium">Quản lý dự án</p>
+                    <p class="text-sm text-gray-500 mt-1">Xem và quản lý dự án</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

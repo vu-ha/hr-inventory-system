@@ -1,0 +1,88 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(title='Chi tiết Nhân viên', content=~{::content})}">
+    <div th:fragment="content">
+        <div class="mb-6">
+            <a href="/employees" class="text-blue-600 hover:text-blue-800 mb-4 inline-block">
+                <i class="fas fa-arrow-left mr-2"></i>Quay lại
+            </a>
+            <div class="flex items-center justify-between">
+                <h1 class="text-3xl font-bold text-gray-900" th:text="${employee.fullName ?: 'Chi tiết Nhân viên'}"></h1>
+                <a th:href="@{/employees/{id}/edit(id=${employee.id})}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    <i class="fas fa-edit mr-2"></i>Chỉnh sửa
+                </a>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Thông tin cơ bản -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <h2 class="text-xl font-semibold mb-4">Thông tin cơ bản</h2>
+                <dl class="space-y-3">
+                    <div>
+                        <dt class="text-sm font-medium text-gray-500">Mã nhân viên</dt>
+                        <dd class="mt-1 text-sm text-gray-900" th:text="${employee.employeeCode ?: 'N/A'}"></dd>
+                    </div>
+                    <div>
+                        <dt class="text-sm font-medium text-gray-500">Email</dt>
+                        <dd class="mt-1 text-sm text-gray-900" th:text="${employee.email ?: 'N/A'}"></dd>
+                    </div>
+                    <div>
+                        <dt class="text-sm font-medium text-gray-500">Số điện thoại</dt>
+                        <dd class="mt-1 text-sm text-gray-900" th:text="${employee.phoneNumber ?: 'N/A'}"></dd>
+                    </div>
+                    <div>
+                        <dt class="text-sm font-medium text-gray-500">Giới tính</dt>
+                        <dd class="mt-1 text-sm text-gray-900" th:text="${employee.gender == 'MALE' ? 'Nam' : (employee.gender == 'FEMALE' ? 'Nữ' : 'Khác')}"></dd>
+                    </div>
+                    <div>
+                        <dt class="text-sm font-medium text-gray-500">Phòng ban</dt>
+                        <dd class="mt-1 text-sm text-gray-900" th:text="${employee.departmentName ?: 'Chưa phân công'}"></dd>
+                    </div>
+                </dl>
+            </div>
+
+            <!-- Bổ nhiệm đang active -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <h2 class="text-xl font-semibold mb-4">Bổ nhiệm hiện tại</h2>
+                <div th:if="${activeAppointments != null && !activeAppointments.isEmpty()}" class="space-y-3">
+                    <div th:each="appointment : ${activeAppointments}" class="border-l-4 border-blue-500 pl-4">
+                        <p class="font-medium" th:text="${appointment.positionName ?: 'N/A'}"></p>
+                        <p class="text-sm text-gray-600" th:text="${appointment.departmentName ?: 'N/A'}"></p>
+                        <p class="text-xs text-gray-500" th:text="${'Từ: ' + (appointment.startDate ?: 'N/A')}"></p>
+                    </div>
+                </div>
+                <p th:if="${activeAppointments == null || activeAppointments.isEmpty()}" class="text-gray-500">Chưa có bổ nhiệm</p>
+            </div>
+        </div>
+
+        <!-- Lịch sử bổ nhiệm -->
+        <div class="mt-6 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h2 class="text-xl font-semibold mb-4">Lịch sử bổ nhiệm</h2>
+            <div th:if="${appointments != null && !appointments.isEmpty()}">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Vị trí</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Phòng ban</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Ngày bắt đầu</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Ngày kết thúc</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr th:each="appointment : ${appointments}">
+                            <td class="px-4 py-3 text-sm" th:text="${appointment.positionName ?: 'N/A'}"></td>
+                            <td class="px-4 py-3 text-sm" th:text="${appointment.departmentName ?: 'N/A'}"></td>
+                            <td class="px-4 py-3 text-sm" th:text="${appointment.startDate ?: 'N/A'}"></td>
+                            <td class="px-4 py-3 text-sm" th:text="${appointment.endDate ?: 'Đang làm việc'}"></td>
+                            <td class="px-4 py-3">
+                                <span th:if="${appointment.status == 'ACTIVE'}" class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Đang làm việc</span>
+                                <span th:if="${appointment.status == 'TERMINATED'}" class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800">Đã kết thúc</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p th:if="${appointments == null || appointments.isEmpty()}" class="text-gray-500">Chưa có lịch sử bổ nhiệm</p>
+        </div>
+    </div>
+</div>

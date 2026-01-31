@@ -1,0 +1,43 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(title='Quản lý Quyết định', content=~{::content})}">
+    <div th:fragment="content">
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-3xl font-bold text-gray-900">Quản lý Quyết định</h1>
+            <a href="/decisions/new" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                <i class="fas fa-plus mr-2"></i>Tạo quyết định
+            </a>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+            <table class="w-full">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Số quyết định</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Loại</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Ngày ký</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Ngày có hiệu lực</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    <tr th:each="decision : ${decisions.content}" class="hover:bg-gray-50">
+                        <td class="px-6 py-4 text-sm font-medium" th:text="${decision.decisionNumber != null ? decision.decisionNumber : 'N/A'}"></td>
+                        <td class="px-6 py-4 text-sm" th:text="${decision.decisionType != null ? decision.decisionType : 'N/A'}"></td>
+                        <td class="px-6 py-4 text-sm" th:text="${decision.signDate != null ? decision.signDate : 'N/A'}"></td>
+                        <td class="px-6 py-4 text-sm" th:text="${decision.effectiveDate != null ? decision.effectiveDate : 'N/A'}"></td>
+                        <td class="px-6 py-4 text-right">
+                            <a th:href="@{/decisions/{id}(id=${decision.id})}" class="text-blue-600 hover:text-blue-800 mr-3">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <form th:action="@{/decisions/{id}/delete(id=${decision.id})}" method="post" class="inline">
+                                <button type="submit" onclick="return confirm('Xóa quyết định này?')" 
+                                    class="text-red-600 hover:text-red-800">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
